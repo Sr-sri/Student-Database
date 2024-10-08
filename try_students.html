@@ -1,0 +1,75 @@
+<!-- students/students.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'students/styles.css' %}">
+    <title>Students List</title>
+</head>
+
+<body>
+    <header>
+        <div class="banner-container">
+            <img src="{% static 'students/images/dsce_bannerhd.png' %}" alt="Banner Image" class="banner-image">
+            <h1 class="header-title">Students Dashboard</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="latest-update">
+            <h2 class="section-title">
+                Attendance Update</h2>
+            <div class="updates-list">
+                {% for student in last_data %}
+                    <div class="update-item">
+                        <div class="profile-pic-container">
+                            <img src="{% static 'students/images/profile_logo.png' %}" alt="Profile Picture" class="profile-pic">
+                        </div>
+                        <div class="update-details">
+                            <p class="update-info">Reg. No: {{student.regno}}</p>
+                            <p class="update-info">Status: Present</p>
+                            <p class="update-info">Time: {{student.cur_time}}</p>
+                            <p class="update-info">Date: {{student.cur_date}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="total-count">
+            {% for student in last_data %}
+                <h1 class="total-count-info">Total Count: {{student.id}}</h1>
+            {% endfor %}
+        </section>
+
+        <section class="attendance-history">
+            <h2 class="section-title">Attendance History</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Reg. No</th>
+                        <th>Status</th>
+                        <th>Time</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in all_data %}
+                        <tr>
+                            <td>{{student.regno}}</td>
+                            <td>Present</td>
+                            <td>{{student.cur_time}}</td>
+                            <td>{{student.cur_date}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+</body>
+
+</html>
